@@ -48,64 +48,14 @@ export default function SslPaymentPage() {
 
     try {
       const res = await fetch(
-        `https://a088f3c16c9b.ngrok-free.app/api/v1/payment/create-session`,
+        `https://a088f3c16c9b.ngrok-free.app/api/v1/payment/checkout`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: customerEmail,
-            name: customerName,
-            phone: "01700000000",
-            address: {
-              addressLine1: "123 Road",
-              addressLine2: "Flat B3",
-              city: "Dhaka",
-              state: "Dhaka",
-              postCode: "1207",
-              country: "Bangladesh",
-            },
-            contactWay: "Email",
-            reason: "Friend_family",
-            notes: "Please keep me updated",
-            paymentGateway: "Sslcommerz",
-            currency: "GBP",
-            donationItems: [
-              {
-                itemType: "Appeal",
-                itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-                amount: 5,
-                quantity: 2,
-                donationOption: "Zakat",
-                paymentFrequency: "Single",
-                paymentType: "Single",
-              },
-            //   {
-            //     itemType: "Appeal",
-            //     itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-            //     amount: 5,
-            //     quantity: 3,
-            //     donationOption: "Zakat",
-            //     paymentFrequency: "Monthly",
-            //     paymentType: "Regular",
-            //   },
-            //   {
-            //     itemType: "Event",
-            //     itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-            //     paymentFrequency: "Single",
-            //     paymentType: "Single",
-            //     amount: 3,
-            //     quantity: 2,
-            //   },
-            //   {
-            //     itemType: "Event",
-            //     itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-            //     paymentFrequency: "Yearly",
-            //     paymentType: "Regular",
-            //     amount: 4,
-            //     quantity: 3,
-            //   },
-            ],
-          }),
+             body: JSON.stringify({
+        paymentSessionId: "id here",
+        paymentGateway: "Sslcommerz",       
+      }),
         }
       );
 
