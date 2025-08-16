@@ -15,7 +15,7 @@ const stripePromise = loadStripe(
 
 export const apiUrl = "http://localhost:8080/api/v1";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({paymentSessionId}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [customerName, setCustomerName] = useState(`Test ${(Math.random() * 9000)}`);
@@ -38,12 +38,17 @@ const CheckoutForm = () => {
 
     // try {
     // 1. Prepare checkout on backend: get SetupIntent client secret
+
+    if(!paymentSessionId) {
+      alert("payment session id not found")
+      return ; 
+    }
     const prepResp = await fetch(`${apiUrl}/payment/checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({
-        paymentSessionId: "id here",
+        paymentSessionId: paymentSessionId,
         paymentGateway: "Stripe",       
       }),
     }).then((r) => r.json());
@@ -51,7 +56,6 @@ const CheckoutForm = () => {
     const {
       setupIntentClientSecret,
       customerId,
-      paymentSessionId,
     } = prepResp.data;
 
     
@@ -203,12 +207,12 @@ const CheckoutForm = () => {
   );
 };
 
-const Checkout = () => {
+const Checkout = ({paymentSessionId}) => {
   // We can optionally prefetch a SetupIntent here by calling backend to get client secret,
   // but our form does that on submit.
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm />
+      <CheckoutForm paymentSessionId={paymentSessionId} />
     </Elements>
   );
 };

@@ -19,10 +19,10 @@ function App() {
         <div>
           <button onClick={()=>setFormState(true)}>ge to form</button>
           <div style={{ margin: "60px 0" }}>
-            <SslPaymentPage />
+            <SslPaymentPage  paymentSessionId={paymentSessionId}/>
           </div>
-          <DonatePage />
-          <Checkout />
+          <DonatePage paymentSessionId={paymentSessionId} />
+          <Checkout paymentSessionId={paymentSessionId} />
         </div>
       )}
     </>

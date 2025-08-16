@@ -17,24 +17,23 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
     contactWay: "Email",
     reason: "Friend_family",
     notes: "Please keep me updated",
-    paymentGateway: "Paypal",
-    currency: "GBP",
+    currency: "GBP", // need to modify=================
     donationItems: [
       {
         itemType: "Appeal",
         itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
         amount: 5,
-        quantity: 5,
+        quantity: 4,
         donationOption: "Zakat",
-        paymentFrequency: "Single",
-        paymentType: "Single",
+        paymentFrequency: "Monthly",
+        paymentType: "Regular",
       },
       {
         itemType: "Event",
         itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
         paymentFrequency: "Single",
         paymentType: "Single",
-        amount: 3,
+        amount: 22,
         quantity: 2,
       },
     ],
@@ -139,13 +138,13 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
         placeholder="Notes"
         className="border p-2 w-full"
       />
-      <input
+      {/* <input
         name="paymentGateway"
         value={form.paymentGateway}
         onChange={handleChange}
         placeholder="Payment Gateway"
         className="border p-2 w-full"
-      />
+      /> */}
       <input
         name="currency"
         value={form.currency}

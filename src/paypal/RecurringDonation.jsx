@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
-export const RecurringDonation = () => {
+export const RecurringDonation = ({paymentSessionId}) => {
   const [{ isPending }] = usePayPalScriptReducer();
   const [message, setMessage] = useState("");
 
@@ -12,6 +12,9 @@ export const RecurringDonation = () => {
       <PayPalButtons
         style={{ layout: "vertical" }}
         createSubscription={async () => {
+          if(!paymentSessionId) {
+            alert("ps id not found")
+          }
           const resp = await fetch(
             "http://localhost:8080/api/v1/payment/checkout",
             {
@@ -19,7 +22,7 @@ export const RecurringDonation = () => {
               headers: { "Content-Type": "application/json" },
               credentials: "include",
               body: JSON.stringify({
-                paymentSessionId: "id here",
+                paymentSessionId: paymentSessionId,
                 paymentGateway: "Paypal",
               }),
             }

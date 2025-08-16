@@ -2,14 +2,14 @@ import { OneTimeDonation } from "./OneTimeDonation";
 import { PayPalProviderWrapper } from "./PaypalProvider";
 import { RecurringDonation } from "./RecurringDonation";
 
-export const DonatePage = () => (
+export const DonatePage = ({paymentSessionId}) => (
   <PayPalProviderWrapper>
     <div>
       <h1>paypal checking</h1>
-      <OneTimeDonation amount="2.00" currency="GBP" />
+      <OneTimeDonation  paymentSessionId={paymentSessionId} />
 
 <div style={{marginTop:"60px"}}></div>
-      <RecurringDonation />
+      <RecurringDonation paymentSessionId={paymentSessionId} />
 
     </div>
   </PayPalProviderWrapper>

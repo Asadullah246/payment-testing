@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
-export const OneTimeDonation = ({ amount, currency = "GBP" }) => {
+export const OneTimeDonation = ({ paymentSessionId }) => {
   const [{ isPending }] = usePayPalScriptReducer();
   const [message, setMessage] = useState("");
 
@@ -11,9 +11,13 @@ export const OneTimeDonation = ({ amount, currency = "GBP" }) => {
       {isPending && <div>Loading PayPal...</div>}
       <PayPalButtons
         style={{ layout: "vertical" }}
-        forceReRender={[amount, currency]}
+        // forceReRender={[amount, currency]}
         createOrder={async (_, actions) => {
           // create order on your backend
+
+          if (!paymentSessionId) {
+            alert("ps id not found");
+          }
           const resp = await fetch(
             "http://localhost:8080/api/v1/payment/checkout",
             {
@@ -21,9 +25,9 @@ export const OneTimeDonation = ({ amount, currency = "GBP" }) => {
               headers: { "Content-Type": "application/json" },
               credentials: "include",
               body: JSON.stringify({
-        paymentSessionId: "id here",
-        paymentGateway: "Paypal",       
-      }),
+                paymentSessionId: paymentSessionId,
+                paymentGateway: "Paypal",
+              }),
             }
           );
 
@@ -63,9 +67,8 @@ export const OneTimeDonation = ({ amount, currency = "GBP" }) => {
               "Success! Transaction ID: " +
                 (result.captureId || JSON.stringify(result))
             );
-          }
-          else{
-            alert("order id not found")
+          } else {
+            alert("order id not found");
           }
         }}
         onError={(err) => {
