@@ -1,12 +1,86 @@
-# React + Vite
+## create session api payload 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+* api url :  /payment/create-session
+* method : post 
+* sample data : 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+{
+    email: "test1@gmail.com",
+    name: "test 1",
+    phone: "01700000000",
+    address: {
+      addressLine1: "123 Road",
+      addressLine2: "Flat B3",
+      city: "Dhaka",
+      state: "Dhaka",
+      postCode: "1207",
+      country: "Bangladesh",
+    },
+    contactWay: "Email",
+    reason: "Friend_family",
+    notes: "Please keep me updated",
+    currency: "USD", 
+    donationItems: [
+      {
+        itemType: "Event",
+        itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
+        paymentFrequency: "Monthly",
+        paymentType: "Regular",
+        amount: 200,
+        giftAid:25,
+        quantity: 2,
+      },
+      {
+        itemType: "Appeal",
+        itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
+        paymentFrequency: "Single",
+        paymentType: "Single",
+        amount: 330,
+        giftAid:25,
+        quantity: 5,
+      },
+    ],
+  }
 
-## Expanding the ESLint configuration
+  * result:  {
+    id
+  }
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+  ##  checkout api 
+
+  * api url : /payment/checkout
+  * method : post 
+  * data : {
+    paymentSessionId: paymentSessionId( from url)
+    paymentGateway: Stripe or Paypal or Sslcommerz
+  }
+
+  * result : 
+
+   for stripe:
+
+      {setupIntentClientSecret,
+      customerId,}
+
+   for paypal: { id }
+
+   for sslcommerz: {redirectUrl} to redirect
+
+
+   ## finalize payment (needed only for stripe and paypal single payment) :
+
+    * api url : /payment/finalize-payment
+    * method : post 
+    * data : {
+        paymentGateway: Stripe or Paypal,
+        paymentSessionId: paymentSessionId,
+        stripeCustomerId ( for stripe only),
+        paymentMethodId  ( for stripe only),
+        paypalOrderId  ( for paypal only),
+        
+    }
+
+
+    

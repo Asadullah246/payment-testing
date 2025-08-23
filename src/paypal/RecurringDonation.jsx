@@ -27,12 +27,17 @@ export const RecurringDonation = ({paymentSessionId}) => {
               }),
             }
           );
-          const data = await resp.json();
+
+          const response = await resp.json();
+          const data = response.data;
           console.log("data", data);
-          if (!data?.data?.recurringRes?.id) {
-            throw new Error("Failed to create subscription");
+          const id = data?.id;
+          console.log("id", id);
+          if (!id) {
+            alert( "id not found")
           }
-          return data?.data?.recurringRes?.id;
+          return id;
+
         }}
         onApprove={(data) => {
           setMessage("Subscription active! ID: " + data.subscriptionID);

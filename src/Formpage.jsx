@@ -17,24 +17,25 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
     contactWay: "Email",
     reason: "Friend_family",
     notes: "Please keep me updated",
-    currency: "GBP", // need to modify=================
+    currency: "USD", // need to modify=================
     donationItems: [
       {
-        itemType: "Appeal",
+        itemType: "Event",
         itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-        amount: 5,
-        quantity: 5,
-        donationOption: "Zakat",
         paymentFrequency: "Monthly",
         paymentType: "Regular",
+        amount: 23,
+        giftAid:25,
+        quantity: 2,
       },
       {
         itemType: "Event",
         itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
         paymentFrequency: "Single",
         paymentType: "Single",
-        amount: 23,
-        quantity: 2,
+        amount: 330,
+        giftAid:25,
+        quantity: 5,
       },
     ],
   });
@@ -176,3 +177,5 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
     </form>
   );
 }
+
+

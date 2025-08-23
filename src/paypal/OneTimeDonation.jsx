@@ -34,10 +34,10 @@ export const OneTimeDonation = ({ paymentSessionId }) => {
           const response = await resp.json();
           const data = response.data;
           console.log("data", data);
-          const id = data?.singleRes?.id;
+          const id = data?.id;
           console.log("id", id);
           if (!id) {
-            throw new Error("Failed to create order");
+            alert( "id not found")
           }
           return id;
         }}
