@@ -1,3 +1,8 @@
+
+
+### references : https://github.com/Asadullah246/payment-testing
+
+
 ## create session api payload 
 
 
@@ -40,11 +45,13 @@
         giftAid:25,
         quantity: 5,
       },
+
+      // more data 
     ],
   }
 
   * result:  {
-    id
+    id ( paymentSessionId )
   }
 
 

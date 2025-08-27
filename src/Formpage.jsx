@@ -14,27 +14,31 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
       postCode: "1207",
       country: "Bangladesh",
     },
-    contactWay: "Email",
+    contactWay: ["Email"],
     reason: "Friend_family",
     notes: "Please keep me updated",
-    currency: "USD", // need to modify=================
-    donationItems: [
+    currency: "USD",
+    items: [
       {
         itemType: "Event",
         itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-        paymentFrequency: "Monthly",
+        itemTitle:"this is title",
+        itemSlug:"this-is-title",
+        frequency: "Monthly",
         paymentType: "Regular",
         amount: 23,
-        giftAid:25,
+        giftAid: true,
         quantity: 2,
       },
       {
-        itemType: "Event",
+        itemType: "Appeal",
         itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
-        paymentFrequency: "Single",
+        itemTitle:"this is title",
+        itemSlug:"this-is-title-2",
+        frequency: "Single",
         paymentType: "Single",
-        amount: 330,
-        giftAid:25,
+        amount: 3,
+        giftAid: false,
         quantity: 5,
       },
     ],
@@ -49,6 +53,8 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
         ...prev,
         address: { ...prev.address, [key]: value },
       }));
+    } else if (name == "contactWay") {
+      setForm((prev) => ({ ...prev, [name]: [value] }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
@@ -56,9 +62,9 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
 
   const handleDonationItemChange = (index, field, value) => {
     setForm((prev) => {
-      const newItems = [...prev.donationItems];
+      const newItems = [...prev.items];
       newItems[index] = { ...newItems[index], [field]: value };
-      return { ...prev, donationItems: newItems };
+      return { ...prev, items: newItems };
     });
   };
 
@@ -74,7 +80,7 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
         body: JSON.stringify(form),
       }).then((r) => r.json());
 
-      console.log("prepResp", res);
+      console.log("res", res);
       setPaymentSessionId(res.data.id);
       setFormState(false);
     } catch (err) {
@@ -155,7 +161,7 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
       />
 
       {/* Donation Items */}
-      {form.donationItems.map((item, idx) => (
+      {form.items.map((item, idx) => (
         <>
           {Object.keys(item).map((field) => (
             <input
@@ -177,5 +183,3 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
     </form>
   );
 }
-
-

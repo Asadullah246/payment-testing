@@ -48,7 +48,7 @@ const CheckoutForm = ({paymentSessionId}) => {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({
-        paymentSessionId: paymentSessionId,
+        donationId: paymentSessionId,
         paymentGateway: "Stripe",       
       }),
     }).then((r) => r.json());
