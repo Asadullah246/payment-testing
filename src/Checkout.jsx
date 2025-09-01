@@ -136,7 +136,7 @@ const CheckoutForm = ({paymentSessionId}) => {
 
   return (
     <div style={{ maxWidth: 600, margin: "0 auto", padding: 20 }}>
-    <h1>Stripe checking</h1>
+    {/* <h1 className="text-black">Stripe checking</h1> */}
 
       <form onSubmit={handleCheckout}>
         <div style={{ marginBottom: 12 }}>

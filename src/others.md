@@ -1,3 +1,36 @@
+
+
+
+
+for single paypal payment : PAYMENT.CAPTURE.COMPLETED
+the custom id field : custom_id
+
+for single also: CHECKOUT.ORDER.APPROVED,  CHECKOUT.ORDER.APPROVED
+the custom id field : purchase_units[0].custom_id
+
+
+
+for recurring payment : PAYMENT.SALE.COMPLETED
+the custom id field : custom
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body: JSON.stringify({
                 email: "test2@gmail.com",
                 name: "test 2",

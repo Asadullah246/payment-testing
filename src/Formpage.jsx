@@ -34,10 +34,10 @@ export default function DonationForm() {
         itemSlug: "this-is-title",
         frequency: "Monthly",
         paymentType: "Regular",
-        donationOption: "Zakat",
-        amount: 3,
-        giftAid: true,
+        donationOption: "Zakat", 
+        amount: 2,
         quantity: 2,
+        giftAid: true,
       },
       {
         itemType: "Appeal",
@@ -47,9 +47,9 @@ export default function DonationForm() {
         frequency: "Single",
         paymentType: "Single",
         donationOption: "Sadaqah",
-        amount: 4,
-        giftAid: false,
+        amount: 3,
         quantity: 2,
+        giftAid: false,
       },
     ],
   });
@@ -92,7 +92,7 @@ export default function DonationForm() {
       }).then((r) => r.json());
 
       if (res.data?.id) {
-        toast.success("Form submitted successfully!");
+        // toast.success("Form submitted successfully!");
         navigate(`/checkout/${res.data.id}`);
       } else {
         toast.error("Error creating payment session");
@@ -107,14 +107,14 @@ export default function DonationForm() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-12 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+        {/* <div className="text-center mb-12 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
           <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
             Make a Difference Today
           </h1>
           <p className="text-lg text-gray-600">
             Your generosity helps change lives
           </p>
-        </div>
+        </div> */}
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Personal Information */}
@@ -176,7 +176,7 @@ export default function DonationForm() {
                   >
                     <option value="USD">USD - US Dollar</option>
                     <option value="GBP">GBP - British Pound</option>
-                    <option value="EUR">EUR - Euro</option>
+                    <option value="BDT">BDT - Bangladeshi Taka</option>
                   </select>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export default function DonationForm() {
                       name={`address.${key}`}
                       value={form.address[key]}
                       onChange={handleChange}
-                      placeholder={`Enter your ${key.toLowerCase()}`}
+                      // placeholder={`Enter your ${key.toLowerCase()}`}
                       className="form-input block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
