@@ -104,11 +104,11 @@ export default function DonationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-12 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-          <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">
             Make a Difference Today
           </h1>
           <p className="text-lg text-gray-600">
@@ -137,7 +137,7 @@ export default function DonationForm() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="Enter your email"
-                    className="form-input block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-base shadow-sm hover:border-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:bg-white"
+                    className="form-input block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
@@ -149,7 +149,7 @@ export default function DonationForm() {
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Enter your name"
-                    className="form-input block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-base shadow-sm hover:border-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:bg-white"
+                    className="form-input block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
@@ -172,7 +172,7 @@ export default function DonationForm() {
                     name="currency"
                     value={form.currency}
                     onChange={handleChange}
-                    className="form-select block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-base shadow-sm hover:border-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:bg-white appearance-none"
+                    className="form-select block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="USD">USD - US Dollar</option>
                     <option value="GBP">GBP - British Pound</option>
@@ -262,7 +262,7 @@ export default function DonationForm() {
                     onChange={handleChange}
                     rows="4"
                     placeholder="Add any special requests or additional information"
-                    className="form-textarea block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-base shadow-sm hover:border-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:bg-white resize-y"
+                    className="form-textarea block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
               </div>

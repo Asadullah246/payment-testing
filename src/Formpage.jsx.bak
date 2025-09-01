@@ -1,0 +1,335 @@
+import { useState } from "react";
+import { apiUrl } from "./Checkout";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  UserIcon,
+  MapPinIcon,
+  DocumentTextIcon,
+  CurrencyDollarIcon,
+} from "@heroicons/react/24/outline";
+import {
+  UserIcon,
+  MapPinIcon,
+  DocumentTextIcon,
+  CurrencyDollarIcon,
+} from "@heroicons/react/24/outline";
+
+export default function DonationForm() {
+  const [form, setForm] = useState({
+    email: "test1@gmail.com",
+    name: "test 1",
+    phone: "+8801897878765",
+    address: {
+      addressLine1: "123 Road",
+      addressLine2: "Flat B3",
+      city: "Dhaka",
+      state: "Dhaka",
+      postCode: "1207",
+      country: "Bangladesh",
+    },
+    contactWay: ["Email"],
+    reason: "Friend_family",
+    notes: "Please keep me updated",
+    currency: "USD",
+    items: [
+      {
+        itemType: "Event",
+        itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
+        itemTitle: "this is title",
+        itemSlug: "this-is-title",
+        frequency: "Monthly",
+        paymentType: "Regular",
+        donationOption: "Zakat",
+        amount: 3,
+        giftAid: true,
+        quantity: 2,
+      },
+      {
+        itemType: "Appeal",
+        itemId: "f56a4b3c-b9d1-4e45-9fd6-faad070e9f61",
+        itemTitle: "this is title",
+        itemSlug: "this-is-title-2",
+        frequency: "Single",
+        paymentType: "Single",
+        donationOption: "Sadaqah",
+        amount: 4,
+        giftAid: false,
+        quantity: 2,
+      },
+    ],
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name.startsWith("address.")) {
+      const key = name.split(".")[1];
+      setForm((prev) => ({
+        ...prev,
+        address: { ...prev.address, [key]: value },
+      }));
+    } else if (name == "contactWay") {
+      setForm((prev) => ({ ...prev, [name]: [value] }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleDonationItemChange = (index, field, value) => {
+    setForm((prev) => {
+      const newItems = [...prev.items];
+      newItems[index] = { ...newItems[index], [field]: value };
+      return { ...prev, items: newItems };
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("value", form);
+
+    try {
+      const res = await fetch(`${apiUrl}/payment/create-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(form),
+      }).then((r) => r.json());
+
+      console.log("res", res);
+      if (res.data?.id) {
+        toast.success("Form submitted successfully!");
+        navigate(`/checkout/${res.data.id}`);
+      } else {
+        toast.error("Error creating payment session");
+      }
+    } catch (err) {
+      console.error("Error submitting form", err);
+      toast.error("Error submitting form");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Make a Donation</h1>
+          <p className="text-gray-600">Your generosity makes a difference</p>
+        </div>
+          return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Make a Donation</h1>
+          <p className="text-gray-600">Your generosity makes a difference</p>
+        </div>
+        return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">Make a Donation</h1>
+          <p className="text-lg text-gray-600">Your generosity makes a difference</p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-8"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Name
+            </label>
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Phone
+            </label>
+            <input
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              placeholder="Enter your phone number"
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Currency
+            </label>
+            <select
+              name="currency"
+              value={form.currency}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="bg-gray-50 p-6 rounded-md">
+          <h2 className="text-xl font-semibold mb-4">Address</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {Object.keys(form.address).map((key) => (
+              <div key={key}>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {key.charAt(0).toUpperCase() +
+                    key.slice(1).replace(/([A-Z])/g, " $1")}
+                </label>
+                <input
+                  name={`address.${key}`}
+                  value={form.address[key]}
+                  onChange={handleChange}
+                  placeholder={`Enter your ${key.toLowerCase()}`}
+                  className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Contact Way
+          </label>
+          <select
+            name="contactWay"
+            value={form.contactWay[0]}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="Email">Email</option>
+            <option value="Phone">Phone</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Reason
+          </label>
+          <select
+            name="reason"
+            value={form.reason}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="Friend_family">Friend/Family</option>
+            <option value="Social_media">Social Media</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Notes
+          </label>
+          <textarea
+            name="notes"
+            value={form.notes}
+            onChange={handleChange}
+            placeholder="Add any additional notes"
+            rows="3"
+            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div className="space-y-6">
+          <h2 className="text-xl font-semibold">Donation Items</h2>
+          {form.items.map((item, idx) => (
+            <div key={idx} className="bg-gray-50 p-6 rounded-md">
+              <h3 className="text-lg font-medium mb-4">Item {idx + 1}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.keys(item).map((field) => (
+                  <div key={field}>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {field.charAt(0).toUpperCase() +
+                        field.slice(1).replace(/([A-Z])/g, " $1")}
+                    </label>
+                    {field === "frequency" ? (
+                      <select
+                        value={item[field]}
+                        onChange={(e) =>
+                          handleDonationItemChange(idx, field, e.target.value)
+                        }
+                        className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="Monthly">Monthly</option>
+                        <option value="Single">Single</option>
+                      </select>
+                    ) : field === "donationOption" ? (
+                      <select
+                        value={item[field]}
+                        onChange={(e) =>
+                          handleDonationItemChange(idx, field, e.target.value)
+                        }
+                        className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="Zakat">Zakat</option>
+                        <option value="Sadaqah">Sadaqah</option>
+                      </select>
+                    ) : field === "giftAid" ? (
+                      <select
+                        value={item[field]}
+                        onChange={(e) =>
+                          handleDonationItemChange(
+                            idx,
+                            field,
+                            e.target.value === "true"
+                          )
+                        }
+                        className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    ) : (
+                      <input
+                        value={item[field]}
+                        onChange={(e) =>
+                          handleDonationItemChange(idx, field, e.target.value)
+                        }
+                        placeholder={`Enter ${field.toLowerCase()}`}
+                        className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-md shadow-sm transition-colors"
+          >
+            Proceed to Payment
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}

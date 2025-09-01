@@ -1,31 +1,27 @@
-import { useState } from "react";
 import "./App.css";
-import Checkout from "./Checkout";
-import { DonatePage } from "./paypal/Donate";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import DonationForm from "./Formpage";
-import SslPaymentPage from "./sslcommerz";
+import CheckoutPage from "./pages/CheckoutPage";
+import { SuccessPage, FailedPage, CancelledPage } from "./pages/StatusPages";
 
 function App() {
-  const [formState, setFormState] = useState(true);
-  const [paymentSessionId, setPaymentSessionId]=useState(null)
-
   return (
-    <>
-
-
-      {formState ? (
-        <DonationForm setFormState={setFormState}  setPaymentSessionId={setPaymentSessionId}/>
-      ) : (
-        <div>
-          <button onClick={()=>setFormState(true)}>ge to form</button>
-          <div style={{ margin: "60px 0" }}>
-            <SslPaymentPage  paymentSessionId={paymentSessionId}/>
-          </div>
-          <DonatePage paymentSessionId={paymentSessionId} />
-          <Checkout paymentSessionId={paymentSessionId} />
+    <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={5000} />
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto py-8">
+          <Routes>
+            <Route path="/" element={<DonationForm />} />
+            <Route path="/checkout/:id" element={<CheckoutPage />} />
+            <Route path="/success/:id" element={<SuccessPage />} />
+            <Route path="/failed/:id" element={<FailedPage />} />
+            <Route path="/cancelled/:id" element={<CancelledPage />} />
+          </Routes>
         </div>
-      )}
-    </>
+      </div>
+    </BrowserRouter>
   );
 }
 

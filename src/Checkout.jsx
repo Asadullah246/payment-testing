@@ -18,8 +18,6 @@ export const apiUrl = "http://localhost:8080/api/v1";
 const CheckoutForm = ({paymentSessionId}) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [customerName, setCustomerName] = useState(`Test ${(Math.random() * 9000)}`);
-  const [customerEmail, setCustomerEmail] = useState(`Test${(Math.random() * 9000)}@gmail.com`);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
@@ -29,10 +27,10 @@ const CheckoutForm = ({paymentSessionId}) => {
     setError(null);
     if (!stripe || !elements) return;
 
-    if (!customerEmail || !customerName) {
-      setError("Name and email are required.");
-      return;
-    }
+    // if (!customerEmail || !customerName) {
+    //   setError("Name and email are required.");
+    //   return;
+    // }
 
     setProcessing(true);
 
@@ -141,30 +139,6 @@ const CheckoutForm = ({paymentSessionId}) => {
     <h1>Stripe checking</h1>
 
       <form onSubmit={handleCheckout}>
-        <div style={{ marginBottom: 12 }}>
-          <label>
-            Name
-            <input
-              type="text"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              required
-              style={{ width: "100%", padding: 8, marginTop: 4 }}
-            />
-          </label>
-        </div>
-        <div style={{ marginBottom: 12 }}>
-          <label>
-            Email
-            <input
-              type="email"
-              value={customerEmail}
-              onChange={(e) => setCustomerEmail(e.target.value)}
-              required
-              style={{ width: "100%", padding: 8, marginTop: 4 }}
-            />
-          </label>
-        </div>
         <div style={{ marginBottom: 12 }}>
           <label>
             Card details
