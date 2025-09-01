@@ -12,6 +12,8 @@ export const RecurringDonation = ({paymentSessionId}) => {
       <PayPalButtons
         style={{ layout: "vertical" }}
         createSubscription={async () => {
+
+          console.log("paymtnsssionid", paymentSessionId )
           if(!paymentSessionId) {
             alert("ps id not found")
           }
@@ -22,7 +24,7 @@ export const RecurringDonation = ({paymentSessionId}) => {
               headers: { "Content-Type": "application/json" },
               credentials: "include",
               body: JSON.stringify({
-                paymentSessionId: paymentSessionId,
+                donationId: paymentSessionId, 
                 paymentGateway: "Paypal",
               }),
             }

@@ -14,7 +14,7 @@ export const OneTimeDonation = ({ paymentSessionId }) => {
         // forceReRender={[amount, currency]}
         createOrder={async (_, actions) => {
           // create order on your backend
-
+console.log("paymetsissionid", paymentSessionId)
           if (!paymentSessionId) {
             alert("ps id not found");
           }
@@ -25,7 +25,7 @@ export const OneTimeDonation = ({ paymentSessionId }) => {
               headers: { "Content-Type": "application/json" },
               credentials: "include",
               body: JSON.stringify({
-                paymentSessionId: paymentSessionId,
+                donationId: paymentSessionId,
                 paymentGateway: "Paypal",
               }),
             }

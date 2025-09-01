@@ -56,6 +56,8 @@ const CheckoutForm = ({paymentSessionId}) => {
     const {
       setupIntentClientSecret,
       customerId,
+      name,
+      email
     } = prepResp.data;
 
     
@@ -70,8 +72,8 @@ const CheckoutForm = ({paymentSessionId}) => {
         payment_method: {
           card: elements.getElement(CardElement),
           billing_details: {
-            name: customerName,
-            email: customerEmail,
+            name: name,
+            email: email,
           },
         },
       }
@@ -88,7 +90,7 @@ const CheckoutForm = ({paymentSessionId}) => {
     const payload = {
       stripeCustomerId: customerId,
       paymentMethodId,
-      paymentSessionId: paymentSessionId,
+      donationId: paymentSessionId,
       paymentGateway: "Stripe",
     };
 

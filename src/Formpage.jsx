@@ -5,7 +5,7 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
   const [form, setForm] = useState({
     email: "test1@gmail.com",
     name: "test 1",
-    phone: "01700000000",
+    phone: "+8801897878765",
     address: {
       addressLine1: "123 Road",
       addressLine2: "Flat B3",
@@ -26,7 +26,8 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
         itemSlug:"this-is-title",
         frequency: "Monthly",
         paymentType: "Regular",
-        amount: 23,
+        donationOption:"Zakat",
+        amount: 5,
         giftAid: true,
         quantity: 2,
       },
@@ -37,9 +38,10 @@ export default function DonationForm({ setFormState, setPaymentSessionId }) {
         itemSlug:"this-is-title-2",
         frequency: "Single",
         paymentType: "Single",
+        donationOption:"Sadaqah",
         amount: 3,
         giftAid: false,
-        quantity: 5,
+        quantity: 2,
       },
     ],
   });

@@ -13,14 +13,15 @@ export default function SslPaymentPage({paymentSessionId}) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
              body: JSON.stringify({
-        paymentSessionId: paymentSessionId,
+        donationId: paymentSessionId,
         paymentGateway: "Sslcommerz",       
       }),
         }
       );
 
       const data = await res.json();
-      console.log("data ", data.data.redirectUrl)
+      console.log("data ", data)
+      // return ; 
       if (data?.data?.redirectUrl) {
         window.location.href = data.data.redirectUrl; 
       } else {
